@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14490.70" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="PsychicTester_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="IMPORTANT!!" textAlignment="center" id="55X-iq-f3a"/>
+                        <label alignment="center" verticalAlignment="center" text="Read instructions on Phone before continuing" textAlignment="center" numberOfLines="0" id="gzb-k2-UXP">
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                        <button width="1" alignment="center" verticalAlignment="center" title="Start" id="Vt5-FB-L6D">
+                            <connections>
+                                <action selector="hideTextButtonPressed" destination="AgC-eL-Hgc" id="JuA-fh-NW8"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="hideTextButton" destination="Vt5-FB-L6D" id="Jxo-1D-JHi"/>
+                        <outlet property="welcomeTextBody" destination="gzb-k2-UXP" id="jAe-dw-ZZs"/>
+                        <outlet property="welcomeTextTitle" destination="55X-iq-f3a" id="crQ-5J-Ein"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+    </scenes>
+</document>
