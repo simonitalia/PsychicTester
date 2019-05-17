@@ -89,7 +89,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         present(ac, animated: true)
     }
     
-    //Detect user's forceful touch on a card, and track it
+    //Detect and track users touch as they move / slide along screen
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         
@@ -100,16 +100,16 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         for card in allCards {
             
-            //`Detect card, via rectangle / frame
+            //Detect card, via rectangle / frame
             if card.view.frame.contains(location) {
                 
                 //Check if forceTouch (aka 3D Touch) is available on device
-                if view.traitCollection.forceTouchCapability == .available {
-                    if touch.force == touch.maximumPossibleForce {
-                        card.front.image = UIImage(named: "cardStar")
-                        card.isCorrect = true
-                    }
-                }
+//                if view.traitCollection.forceTouchCapability == .available {
+//                    if touch.force == touch.maximumPossibleForce {
+//                        card.front.image = UIImage(named: "cardStar")
+//                        card.isCorrect = true
+//                    }
+//                }
                 
                 //Send message to watch if card is correct
                 if card.isCorrect {
