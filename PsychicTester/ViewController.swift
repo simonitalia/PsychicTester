@@ -26,6 +26,7 @@ class ViewController: UIViewController, WCSessionDelegate {
     
     //Rate limit property to track messages sent to watch over x period
     var watchLastMessageSentAt: CFAbsoluteTime = 0
+    var setAllCardsToStar = false
     
     //GradeientView IBOutlet property
     @IBOutlet weak var gradientView: GradientView!
@@ -89,7 +90,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         present(ac, animated: true)
     }
     
-    //Detect user's forceful touch on a card, and track it
+    //Detect user's touche and track their movement along the screen
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         
@@ -100,20 +101,25 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         for card in allCards {
             
-            //`Detect card, via rectangle / frame
-            if card.view.frame.contains(location) {
-                
-                //Check if forceTouch (aka 3D Touch) is available on device
-                if view.traitCollection.forceTouchCapability == .available {
-                    if touch.force == touch.maximumPossibleForce {
-                        card.front.image = UIImage(named: "cardStar")
-                        card.isCorrect = true
+            if setAllCardsToStar == true {
+                card.front.image = UIImage(named: "cardStar")
+            
+            } else {
+                //Detect card, via rectangle / frame
+                if card.view.frame.contains(location) {
+                    
+                    //Check if forceTouch (aka 3D Touch) is available on device, and if so apply star to card when touched with force
+                    if view.traitCollection.forceTouchCapability == .available {
+                        if touch.force == touch.maximumPossibleForce {
+                            card.front.image = UIImage(named: "cardStar")
+                            card.isCorrect = true
+                        }
                     }
-                }
-                
-                //Send message to watch if card is correct
-                if card.isCorrect {
-                    sendWatchMessage()
+                    
+                    //Send message to watch if card is correct
+                    if card.isCorrect {
+                        sendWatchMessage()
+                    }
                 }
             }
         }
@@ -256,7 +262,8 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
     }
     
-    //Watch related methods
+    //MARK: Watch communication methods:
+    //Send message to watch
     func sendWatchMessage() {
         let currentTime = CFAbsoluteTimeGetCurrent()
         
@@ -274,8 +281,24 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         //Update rate limit (messages sent to watch over x time)
         watchLastMessageSentAt = CFAbsoluteTimeGetCurrent()
-
     }
-
+    
+    //Toggle all cards to Star on or off, with message from watch
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        
+        //Ensure Message is not nil
+        if message["Message"] != nil {
+        
+            if message["Message"] as? String == "true" {
+                setAllCardsToStar = true
+                print("Message: true")
+                
+            } else {
+                setAllCardsToStar = false
+                print("Message: false")
+            }
+        }
+        print(setAllCardsToStar)
+    }
 }
 

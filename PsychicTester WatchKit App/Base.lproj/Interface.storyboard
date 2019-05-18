@@ -18,14 +18,23 @@
                         <label alignment="center" verticalAlignment="center" text="Read instructions on Phone before continuing" textAlignment="center" numberOfLines="0" id="gzb-k2-UXP">
                             <fontDescription key="font" style="UICTFontTextStyleBody"/>
                         </label>
-                        <button width="1" alignment="center" verticalAlignment="center" title="Start" id="Vt5-FB-L6D">
+                        <button width="1" alignment="center" verticalAlignment="center" title="Start" id="Vt5-FB-L6D" userLabel="Hide Welcome Text">
                             <connections>
                                 <action selector="hideTextButtonPressed" destination="AgC-eL-Hgc" id="JuA-fh-NW8"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="center" title="⚪️" id="m5e-8E-ebI">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="font" type="system" pointSize="29"/>
+                            <connections>
+                                <action selector="setCardToStarButtonPressed" destination="AgC-eL-Hgc" id="4nu-Eo-Xkj"/>
                             </connections>
                         </button>
                     </items>
                     <connections>
                         <outlet property="hideTextButton" destination="Vt5-FB-L6D" id="Jxo-1D-JHi"/>
+                        <outlet property="setCardToStarButton" destination="m5e-8E-ebI" id="obz-dR-An4"/>
                         <outlet property="welcomeTextBody" destination="gzb-k2-UXP" id="jAe-dw-ZZs"/>
                         <outlet property="welcomeTextTitle" destination="55X-iq-f3a" id="crQ-5J-Ein"/>
                     </connections>
